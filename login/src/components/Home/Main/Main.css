@@ -1,0 +1,143 @@
+.main{
+    margin-top: 50px;
+    height: 100%;
+    width: 100%;
+}
+
+.background{
+    position: fixed;
+    z-index: -9999;
+}
+
+.main .container{
+    max-width: 80%;
+    /* height: 100% !important; */
+    /* position: relative; */
+}
+
+.left-main{
+    /* position: fixed; */
+    display: block;
+    background-color: #fff;
+    border-right: 2px solid #000;
+    /* height: 100% !important; */
+    /* max-width: 320px; */
+}
+
+.right-main{
+
+    background-color: #fff;
+    height: 100% !important;
+    /* margin-left: 320px ;  */
+    /* margin-bottom: 20px; */
+}
+
+.left-main > .container{
+    max-width: 100% !important;
+}
+
+.number-container{
+    /* align-items: center; */
+    justify-content: center;
+    display: flex;
+}
+
+.question-number{
+    /* max-width: 50px; */
+    max-width: 50px;
+    /* max-width: 50%; */
+    min-width: 30px;
+    /* background-color: #fff; */
+    margin: 5px 5px 5px 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.question-number a{
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+}
+
+.time{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+
+.clock-img img{
+    height: 50px;
+    width: 50px;
+}
+
+.clock-img p{
+    font-size:20px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.time-countdown h1{
+    font-size: 35px;
+}
+
+
+/* Button Submit */
+
+.button{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.button-5 {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+  }
+  
+  .button-5:hover,
+  .button-5:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  }
+  
+  .button-5:hover {
+    transform: translateY(-1px);
+  }
+  
+  .button-5:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+  }

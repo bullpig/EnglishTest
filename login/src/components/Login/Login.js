@@ -19,6 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from '@mui/material/Button';
 import SpinLoading from '../SpinLoading/SpinLoading'
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -86,22 +87,29 @@ export default function SignIn() {
     }else {
       setSpinLoading(true);
       var login = { username: data.get("username"), password: data.get("password") };
-      fetch("https://english-backend-v2.herokuapp.com/users/authenticate", {
-        method: "POST",
-        body: JSON.stringify(login),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
+
+      axios.post("https://english-backend-v2.herokuapp.com/users/authenticate",
+        login,
+        {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          }
         },
-      })
+      )
         .then((response) => {
           
           if(response.status == 200) {
+            console.log(response);
             if(data.get('remember') == 'on'){
-              localStorage.setItem("username", data.get('username'));
-              localStorage.setItem("password", data.get('password'));
+              localStorage.setItem("token", response.data.data.token);
+              localStorage.setItem("username", response.data.data.username);
+              localStorage.setItem("userId", response.data.data.id);
               localStorage.setItem("remember", data.get('remember'));
             }else{
-              localStorage.clear();
+              localStorage.setItem("token", response.data.data.token);
+              localStorage.setItem("userId", response.data.data.id);
+              localStorage.removeItem("remember");
+              localStorage.removeItem("username");
             }
             setSpinLoading(false);
             navigate("/home");    
