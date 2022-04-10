@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 
 export default function Clock(props) {
-    const time = parseInt(localStorage.getItem('totalTime'));
-    const [minutes, setMinutes] = useState(time);
-    const [seconds, setSeconds] = useState(0);
+    const time = parseInt(props.totalTime);
+    const {minutes, setMinutes, seconds, setSeconds} = props.params;
+    setMinutes(time);
+    // console.log(minutes);
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (seconds > 0) {

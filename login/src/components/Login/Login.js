@@ -105,9 +105,11 @@ export default function SignIn() {
               localStorage.setItem("username", response.data.data.username);
               localStorage.setItem("userId", response.data.data.id);
               localStorage.setItem("remember", data.get('remember'));
+              localStorage.setItem("fullname", response.data.data.firstName + " " + response.data.data.lastName)
             }else{
               localStorage.setItem("token", response.data.data.token);
               localStorage.setItem("userId", response.data.data.id);
+              localStorage.setItem("fullname", response.data.data.firstName + " " + response.data.data.lastName)
               localStorage.removeItem("remember");
               localStorage.removeItem("username");
             }
@@ -115,12 +117,14 @@ export default function SignIn() {
             navigate("/home");    
           } 
           else {
-            alert('Username or password is incorrect!')
             setSpinLoading(false);
+            alert('Username or password is incorrect!')
             return response.json();
           }
         })
         .catch((err) => {
+          alert('Username or password is incorrect!')
+          setSpinLoading(false);
           console.log(err);
         })
     }

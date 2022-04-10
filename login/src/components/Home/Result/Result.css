@@ -1,13 +1,18 @@
-.result{
-    /* display: flex; */
+.result-score{
     justify-content: center;
     text-align: center;
-    margin-top: 10%;
+    padding-top: 10%;
+    color: #f72a2a;
+
+}
+
+.score-container{
+    font-style: normal !important;
 }
 
 .result h1{
     font-size: 30px;
-    font-family: 'Times New Roman', Times, serif;
-    color: #f72a2a;
 }
+
+
 

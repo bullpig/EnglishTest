@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import SignIn from './components/Login/Login';
 import SignUp from './components/Register/Register';
 import Home from './components/Home/Home';
@@ -7,7 +7,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import PopUp from "./components/Home/Popup/Popup";
 import Result from "./components/Home/Result/Result";
 import { useEffect, useState } from "react";
-import SpinLoading from "./components/SpinLoading/SpinLoading";
+import Quiz from "./components/Home/Quiz/Quiz";
+import Test from "./components/Test";
 
 
 
@@ -21,7 +22,9 @@ function App() {
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/quiz/:lessonId" element={<Quiz />} />
         <Route path="/result" element={<Result />} />
+
       </Routes>
     </BrowserRouter>
 

@@ -1,11 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Header.css"
 import { Navigate, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRightFromBracket, faUser, } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 
 function Header() {
     const userId = localStorage.getItem("userId").toString();
     const navigate = useNavigate();
+    const fullname = localStorage.getItem("fullname");
 
     const handleLogout = (event) => {
         localStorage.removeItem('token');
@@ -17,18 +21,27 @@ function Header() {
         navigate('/login')
     };
 
+    const handleBack = (event) => {
+        navigate('/home')
+    }
+
     return (
         <div className="header">
             <div className="container">
                 <div className="right" >
-                    <span className="userId">
-                        Your ID: {userId}
+                    <div className="icon-user">
+                        <FontAwesomeIcon icon={faUser} />
+                    </div>
+                    <span className="fullname">
+                        {fullname}
                     </span>
                     <div className="">
                         <button className="btn-logout" onClick={handleLogout}>
                             Log out
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ paddingLeft: '10px' }} />
                         </button>
                     </div>
+                    
                 </div>
             </div>
         </div>

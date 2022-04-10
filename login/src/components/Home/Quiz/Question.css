@@ -1,5 +1,5 @@
 .question p{
-    font-size: 17px;
+    font-size: 24px;
     font-weight: 650;
     margin-bottom: 10px;
     font-style: italic;
@@ -11,7 +11,7 @@
 .answer{
     display: flex;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 450;
     color: black;
     transition: .3s;

@@ -1,0 +1,27 @@
+.history-container{
+    border: 1px solid #9bb3af;
+    margin: 4px 0 4px 0;
+    border-radius: 5px;
+}
+
+.exam-name{
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.result-container{
+    padding: 0 10px 0 10px;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.result-container row {
+    width: 100%;
+}
+
+.result-container span{
+    font-weight: 600;
+}
+
