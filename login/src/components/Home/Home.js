@@ -175,20 +175,23 @@ export default function Home() {
             </form>
           </div>
           <div className="row list-lesson">
-          {itemsLesson.map((lesson) => {
-              return (
-                <div className="col-lg-6 col-md-12">
-                  <Lesson
-                    key={lesson.id}
-                    lessonId={lesson.id}
-                    examName={lesson.examName}
-                    totalPoint={lesson.totalPoint}
-                    totalTime={lesson.totalTime}
-                    handleStartLesson={handleStartLesson}
-                  />
-                </div>
-              );
-            })}
+            {itemsLesson.length > 0 ?
+              (itemsLesson.map((lesson) => {
+                return (
+                  <div className="col-lg-6 col-md-12">
+                    <Lesson
+                      key={lesson.id}
+                      lessonId={lesson.id}
+                      examName={lesson.examName}
+                      totalPoint={lesson.totalPoint}
+                      totalTime={lesson.totalTime}
+                      handleStartLesson={handleStartLesson}
+                    />
+                  </div>
+                );
+              })) :
+              (<div className="no-lesson">No Lesson</div>)
+            }
           </div>
           <ReactPaginate
             previousLabel={'<'}
