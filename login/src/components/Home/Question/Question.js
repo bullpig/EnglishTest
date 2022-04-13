@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
 import "./Question.css"
 
 export default function Question(props) {
@@ -8,13 +7,13 @@ export default function Question(props) {
     var answer = question.split('|');
     const index = props.index;
     const id = props.id;
-    const {answerGridBtn, setAnswerGridBtn} = props
-    const {listAnswer, setListAnswer} = props
-    const {completedQuiz, setCompletedQuiz} = props
+    const {answerGridBtn, setAnswerGridBtn} = props;
+    const {listAnswer, setListAnswer} = props;
+    const {completedQuiz, setCompletedQuiz} = props;
 
     const handleChange = (e) =>{
         var target = e.target
-        const answerId = props.listAnswer.findIndex(arr => {return arr.id == target.name})
+        const answerId = props.listAnswer.findIndex(arr => {return arr.id === target.name})
 
         if(answerId < 0) {
             setCompletedQuiz(completedQuiz + 1)

@@ -3,14 +3,13 @@ import { faArrowLeft, faFaceSmile, faUser } from "@fortawesome/free-solid-svg-ic
 import { useNavigate } from "react-router-dom";
 import "./Result.css";
 
-
-
 export default function Result(props){
-
     const navigate = useNavigate();
     const scores = localStorage.getItem('scores');
-    const totalPoint = localStorage.getItem('totalPoint')
+    const totalPoint = localStorage.getItem('totalPoint');
     const fullname = localStorage.getItem("fullname");
+
+    
 
     const handleBack = (event) => {
         navigate('/home')

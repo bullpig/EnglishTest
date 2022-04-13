@@ -1,15 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import './Quiz.css';
 import { useState, useEffect } from 'react';
-import Question from './Question';
-import Clock from "../Clock/Clock";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "../Header/Header";
 import SpinLoading from "../../SpinLoading/SpinLoading";
 import { faArrowLeft, faArrowUp, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PopUp from "../Popup/Popup";
+import Question from "../Question/Question";
 
 
 export default function Quiz() {
@@ -19,23 +17,22 @@ export default function Quiz() {
     const lessonId = params.lessonId;
     const [completedQuiz, setCompletedQuiz] = useState(0);
     const [data, setData] = useState([]);
-    const [totalPoint, setTotalPoint] = useState(0);
     const [numberOfQuiz, setNumberOfQuiz] = useState(0);
     const [answerGridBtn, setAnswerGridBtn] = useState([]);
     const [listAnswer, setListAnswer] = useState([])
     const [isOpen, setIsOpen] = useState(false)
-    const [finalScore, setFinalScore] = useState(0)
     const [loading, setLoading] = useState(false);
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("token");
     const fullname = localStorage.getItem("fullname");
 
     const [totalTime, setTotalTime] = useState(0);
-    const [minutes, setMinutes] = useState(0);
+    const [minutes, setMinutes] = useState(3);
     const [seconds, setSeconds] = useState(0);
 
-    var quizListLength = 0;
+    //Get game
     useEffect(() => {
+        var quizListLength = 0;
         setLoading(true)
         axios({
             method: 'post',
@@ -49,26 +46,26 @@ export default function Quiz() {
                 userId: userId,
             },
         })
-            .then((res) => {
-                if (res.status == 200) {
-                    console.log(res.data);
-                    setData(res.data.data);
-                    setTotalPoint(res.data.totalPoint);
-                    localStorage.setItem('totalPoint', res.data.totalPoint);
-                    setTotalTime(res.data.totalTime);
-                    setMinutes(res.data.totalTime);
-                    quizListLength = res.data.data.length
-                    setNumberOfQuiz(res.data.data.length)
-                    var arr = []
-                    for (var i = 0; i < quizListLength; i++) {
-                        arr.push({ id: res.data.data[i].id, isAnswer: false })
-                    }
-                    setAnswerGridBtn(arr)
-                    setLoading(false);
+        .then((res) => {
+            if (res.status === 200) {
+                setData(res.data.data);
+                // setTotalPoint(res.data.totalPoint);
+                localStorage.setItem('totalPoint', res.data.totalPoint);
+                setTotalTime(res.data.totalTime);
+                setMinutes(res.data.totalTime);
+                quizListLength = res.data.data.length
+                setNumberOfQuiz(res.data.data.length)
+                var arr = []
+                for (var i = 0; i < quizListLength; i++) {
+                    arr.push({ id: res.data.data[i].id, isAnswer: false })
                 }
-            });
-
-    }, [])
+                setAnswerGridBtn(arr)
+            }
+        })
+        .finally(() => {
+            setLoading(false);
+        })
+    },[lessonId,token,userId])
 
     function togglePopup() {
         setIsOpen(true)
@@ -78,7 +75,7 @@ export default function Quiz() {
         setIsOpen(false)
     }
 
-    //CountDown
+    // CountDown
     useEffect(() => {
         let myInterval = setInterval(() => {
             if (seconds > 0) {
@@ -86,8 +83,8 @@ export default function Quiz() {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
-                    finalSubmit();
                     clearInterval(myInterval)
+                    finalSubmit();
                 } else {
                     setMinutes(minutes - 1);
                     setSeconds(59);
@@ -99,9 +96,9 @@ export default function Quiz() {
         };
     });
 
+    //Submit Exam
     function finalSubmit() {
         var timeToDo = (totalTime - minutes - 1) * 60 + (60 - seconds);
-        console.log(timeToDo);
         setLoading(true)
         setIsOpen(false)
         axios.post('https://english-backend-v2.herokuapp.com/games/finishGame',
@@ -118,10 +115,12 @@ export default function Quiz() {
             }
         )
             .then(res => {
-                setFinalScore(res.data.scores)
+                // setFinalScore(res.data.scores)
                 localStorage.setItem('scores', res.data.scores)
-                setLoading(false)
                 navigate('/result');
+            })
+            .then(res => {
+                setLoading(false)
             })
             .catch(error => {
                 console.log("Error")
@@ -187,7 +186,7 @@ export default function Quiz() {
             {loading ? <SpinLoading/> :
             <div className="main">
                 <div className="background">
-                    <img src="../../../../background.jpg"></img>
+                    <img src="../../../../background.jpg" alt="Background"></img>
                 </div>
                 <div className="container">
                     <div className="row">
@@ -196,37 +195,37 @@ export default function Quiz() {
                                 {/* CLOCK */}
                                 <div className="row time">
                                     <div className="col-12 clock-img">
-                                        <img src="../../../../clock.png"></img>
+                                        <img src="../../../../clock.png" alt="Clock"></img>
                                         <h1>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ?  `0${seconds}` : seconds}</h1>
                                         <p>Completed: {completedQuiz}/{numberOfQuiz}</p>
                                     </div>
                                 </div>
-                                <div className="row number-container">
+                                <div className="row number-container" >
                                     {answerGridBtn.map(function (item, index) {
                                         return (
                                             <div
-                                            key={index}
-                                            className="question-number quiz-item col-3"
-                                            style={item.isAnswer ? { background: 'black',color: 'white' } : { background: 'white',color: 'black' }}
-                                            onClick={() => {
-                                              scrollToQuestion(item.id);
-                                            }}
-                                          >
-                                            {index + 1}
-                                          </div>
+                                                key={index}
+                                                className="question-number quiz-item col-3"
+                                                style={item.isAnswer ? { background: 'black', color: 'white' } : { background: 'white', color: 'black' }}
+                                                onClick={() => {
+                                                    scrollToQuestion(item.id);
+                                                }}
+                                            >
+                                                {index + 1}
+                                            </div>
                                         )
                                     })
                                     }
                                 </div>
                                 <div className="button" onClick={togglePopup}>
-                                    <button className="button-5" role="button" type="submit">Submit</button>
+                                    <button className="button-5" type="submit">Submit</button>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-9 right-main">
+                        <div className="col-9 right-main" >
                             {data.map((question, index) => {
                                 return (
-                                    <div /* id={`ques-${index}`} */>
+                                    <div key={question.id}>
                                         <Question
                                             id={question.id}
                                             index={index}
@@ -243,7 +242,7 @@ export default function Quiz() {
                                 )
                             })}
                             <div className="button" onClick={togglePopup}>
-                                <button className="button-5" role="button" type="submit">Submit</button>
+                                <button className="button-5" type="submit">Submit</button>
                             </div>
                         </div>
                         

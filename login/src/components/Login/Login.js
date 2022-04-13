@@ -11,8 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import IconButton from "@material-ui/core/IconButton";
@@ -25,24 +25,21 @@ const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate()
-
   const [values, setValues] = React.useState({
     password: '',
     showPassword: false,
   });
 
-  const[errs, setErrs] = useState({
+  const[errs] = useState({
     username: '',
     password: '',
-  })
+  });
 
   const [spinLoading, setSpinLoading] = useState(false);
-  // console.log(spinLoading);
-
-  const storageUsername = localStorage.getItem('username')
-  const storagePassword = localStorage.getItem('password')
-  const [usernameValue, setUsernameValue] = useState(storageUsername ?? '')
-  const [passwordValue, setPasswordValue] = useState(storagePassword ?? '')
+  const storageUsername = localStorage.getItem('username');
+  const storagePassword = localStorage.getItem('password');
+  const [usernameValue, setUsernameValue] = useState(storageUsername ?? '');
+  const [passwordValue, setPasswordValue] = useState(storagePassword ?? '');
 
   const handleClickShowPassword = () => {
     setValues({
@@ -74,15 +71,13 @@ export default function SignIn() {
     }
 
     var countErrs = 0;
-    if(errs.username != ""){
+    if(errs.username !== ""){
       countErrs++;
     }
-    if(errs.password != ""){
+    if(errs.password !== ""){
       countErrs++;
     }
-    console.log(countErrs);
-
-    if(countErrs !=0){
+    if(countErrs !== 0){
       navigate('/');
     }else {
       setSpinLoading(true);
@@ -97,10 +92,8 @@ export default function SignIn() {
         },
       )
         .then((response) => {
-          
-          if(response.status == 200) {
-            console.log(response);
-            if(data.get('remember') == 'on'){
+          if(response.status === 200) {
+            if(data.get('remember') === 'on'){
               localStorage.setItem("token", response.data.data.token);
               localStorage.setItem("username", response.data.data.username);
               localStorage.setItem("userId", response.data.data.id);
@@ -128,9 +121,6 @@ export default function SignIn() {
           console.log(err);
         })
     }
-
-
-    
   };
 
   return (

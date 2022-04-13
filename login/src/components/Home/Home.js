@@ -1,12 +1,11 @@
 import * as React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createTheme } from '@mui/material/styles';
+import './Home.css';
 import { useNavigate } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './Header/Header';
-import './Home.css';
 import SpinLoading from '../SpinLoading/SpinLoading';
 import Category from './Category/Category';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Lesson from './Lesson/Lesson';
 import { History } from './History/History';
 
-
-const theme = createTheme();
 
 export default function Home() {
 
@@ -27,7 +24,7 @@ export default function Home() {
   const [itemsLesson, setItemsLesson] = useState([]);
   const [active, setActive] = useState(0)
   const [pageCount, setpageCount] = useState(0);
-  const [limitLesson, setLimitLesson] = useState(8)
+  const [limitLesson] = useState(8)
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
   const fullname = localStorage.getItem("fullname");
@@ -96,7 +93,7 @@ export default function Home() {
       console.log(err);
     })
 
-  }, [])
+  }, [limitLesson,token,userId])
 
   const handleGetListByCategory = (categoryId) => {
       setLoading(true)
@@ -178,9 +175,8 @@ export default function Home() {
             {itemsLesson.length > 0 ?
               (itemsLesson.map((lesson) => {
                 return (
-                  <div className="col-lg-6 col-md-12">
+                  <div key={lesson.id} className="col-lg-6 col-md-12">
                     <Lesson
-                      key={lesson.id}
                       lessonId={lesson.id}
                       examName={lesson.examName}
                       totalPoint={lesson.totalPoint}

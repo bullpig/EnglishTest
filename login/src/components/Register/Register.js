@@ -10,14 +10,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SpinLoading from '../SpinLoading/SpinLoading';
-
 
 const theme = createTheme();
 
@@ -29,7 +28,7 @@ export default function SignUp() {
   });
   const [spinLoading, setSpinLoading] = useState(false);
 
-  const[errs, setErrs] = useState({
+  const[errs] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -120,24 +119,24 @@ export default function SignUp() {
     
     var countErrs = 0;
    
-    if(errs.firstName != "") {
+    if(errs.firstName !== "") {
       countErrs++;
     }
-    if(errs.lastName != ""){
+    if(errs.lastName !== ""){
       countErrs++;
     }
-    if(errs.email != ""){
+    if(errs.email !== ""){
       countErrs++;
     }
-    if(errs.username != ""){
+    if(errs.username !== ""){
       countErrs++;
     }
-    if(errs.password != ""){
+    if(errs.password !== ""){
       countErrs++;
     }
     console.log(countErrs);
 
-    if(countErrs != 0 ){
+    if(countErrs !== 0 ){
       navigate('/register')
     }else{
       setSpinLoading(true);
@@ -149,7 +148,7 @@ export default function SignUp() {
         },
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.status === 200) {
             alert("Đăng ký thành công");
             setSpinLoading(false);
             navigate('/');
