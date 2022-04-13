@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -162,6 +161,10 @@ export default function SignUp() {
     }  
   };
 
+  const NavigateToLogin = () => {
+    navigate('/');
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='spin-loading' style={{ display:spinLoading ? 'block' : 'none'}}>
@@ -270,9 +273,10 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <p className="link-to-register" onClick={NavigateToLogin}>Already have an account? Login</p>
+                {/* <Link href="/" variant="body2">
                   Already have an account? Login
-                </Link>
+                </Link> */}
               </Grid>
             </Grid>
           </Box>

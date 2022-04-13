@@ -28,6 +28,7 @@ function App() {
   return (
     <div className="App">
       {checkToken ? null : (
+        <>
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
@@ -35,6 +36,7 @@ function App() {
           <Route path="/quiz/:lessonId" element={<Quiz />} />
           <Route path="/result" element={<Result />} />
         </Routes>
+        </>
       )}
     </div>
   )

@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -123,6 +122,10 @@ export default function SignIn() {
     }
   };
 
+  const NavigateRegister = () => {
+    navigate('/register');
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <div className='spin-loading' style={{ display:spinLoading ? 'block' : 'none' }}>
@@ -203,9 +206,7 @@ export default function SignIn() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Register"}
-                </Link>
+                <p className="link-to-register" onClick={NavigateRegister}>Don't have an account? Register</p>
               </Grid>
             </Grid>
           </Box>
