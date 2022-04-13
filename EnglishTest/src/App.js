@@ -22,6 +22,7 @@ function App() {
       setCheckToken(false);
       navigate("/home")
     }
+    // eslint-disable-next-line
   },[]);
 
   return (
