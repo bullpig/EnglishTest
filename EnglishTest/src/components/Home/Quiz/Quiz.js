@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PopUp from "../Popup/Popup";
 import Question from "../Question/Question";
 
-
 export default function Quiz() {
-
     const navigate = useNavigate();
     const params = useParams();
     const lessonId = params.lessonId;
@@ -245,7 +243,6 @@ export default function Quiz() {
                                 <button className="button-5" type="submit">Submit</button>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>}

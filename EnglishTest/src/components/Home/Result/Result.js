@@ -8,13 +8,10 @@ export default function Result(props){
     const scores = localStorage.getItem('scores');
     const totalPoint = localStorage.getItem('totalPoint');
     const fullname = localStorage.getItem("fullname");
-
-    
-
     const handleBack = (event) => {
         navigate('/home')
     }
-    return(
+    return (
         <div className="score-container">
             <div className="header">
                 <div className="container">
@@ -35,7 +32,7 @@ export default function Result(props){
                 </div>
             </div>
             <div className="result-score">
-                <FontAwesomeIcon icon={faFaceSmile}  style={{color: 'red', fontSize:'50px'}}/>
+                <FontAwesomeIcon icon={faFaceSmile} style={{ color: 'red', fontSize: '50px' }} />
                 <h1>Your score: {scores}/{totalPoint}</h1>
             </div>
         </div>

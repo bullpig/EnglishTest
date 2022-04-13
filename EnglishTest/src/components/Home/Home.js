@@ -41,15 +41,15 @@ export default function Home() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      if(res.status === 200){
-        setCategories(res.data.data)
-        setLoading(false)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        if (res.status === 200) {
+          setCategories(res.data.data)
+          setLoading(false)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
     // Call API ListLesson 1
     axios({
@@ -60,19 +60,19 @@ export default function Home() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      if(res.status === 200){
-        const totalLesson = res.data.data.length;
-        setpageCount(Math.ceil(totalLesson / limitLesson));
-        setListLesson(res.data.data)
-        const newLessonList = res.data.data.slice(0, limitLesson);
-        setItemsLesson(newLessonList)
-        setLoading(false)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        if (res.status === 200) {
+          const totalLesson = res.data.data.length;
+          setpageCount(Math.ceil(totalLesson / limitLesson));
+          setListLesson(res.data.data)
+          const newLessonList = res.data.data.slice(0, limitLesson);
+          setItemsLesson(newLessonList)
+          setLoading(false)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
     // Call API History
     axios({
@@ -83,41 +83,41 @@ export default function Home() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then((res) => {
-      if(res.status === 200){
-        setHistory(res.data.data.reverse());
-        setLoading(false)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => {
+        if (res.status === 200) {
+          setHistory(res.data.data.reverse());
+          setLoading(false)
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
-  }, [limitLesson,token,userId])
+  }, [limitLesson, token, userId])
 
   const handleGetListByCategory = (categoryId) => {
-      setLoading(true)
-      axios({
-        method: 'GET',
-        url: `https://english-backend-v2.herokuapp.com/exams/getListExamByCategory/${categoryId}`,
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${token}`,
-        },
+    setLoading(true)
+    axios({
+      method: 'GET',
+      url: `https://english-backend-v2.herokuapp.com/exams/getListExamByCategory/${categoryId}`,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          const totalLesson = res.data.data.length;
+          setpageCount(Math.ceil(totalLesson / limitLesson));
+          setListLesson(res.data.data)
+          const newLessonList = res.data.data.slice(0, limitLesson);
+          setItemsLesson(newLessonList)
+          setLoading(false)
+        }
       })
-        .then((res) => {
-          if (res.status === 200) {
-            const totalLesson = res.data.data.length;
-            setpageCount(Math.ceil(totalLesson / limitLesson));
-            setListLesson(res.data.data)
-            const newLessonList = res.data.data.slice(0, limitLesson);
-            setItemsLesson(newLessonList)
-            setLoading(false)
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleStartLesson = (lessonId) => {
@@ -159,7 +159,7 @@ export default function Home() {
               );
             })}
           </div>
-          
+
         </div>
         {/* Center Home */}
         <div className="center-home">
@@ -167,7 +167,7 @@ export default function Home() {
             <form className="col-6 form-search">
               <input className="input-search" placeholder="Search..."></input>
               <button className="btn-search">
-                <FontAwesomeIcon icon={faMagnifyingGlass}/> 
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>
             </form>
           </div>
@@ -214,7 +214,7 @@ export default function Home() {
         <div className="right-home">
           <div className="history-title">History</div>
           <div className="list-history">
-            {history.map((history) =>{
+            {history.map((history) => {
               return <History key={history.id} history={history} />;
             })}
           </div>
