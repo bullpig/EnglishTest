@@ -11,9 +11,16 @@ export default function Question(props) {
     const {listAnswer, setListAnswer} = props;
     const {completedQuiz, setCompletedQuiz} = props;
 
+    const isExistedId = (arr, id) => {
+        return arr.findIndex((arr) => {
+            return arr.id === id;
+        });
+    };
+   
+
     const handleChange = (e) =>{
         var target = e.target
-        const answerId = props.listAnswer.findIndex(arr => {return arr.id === target.name})
+        const answerId = isExistedId(listAnswer, parseInt(e.target.name));
 
         if(answerId < 0) {
             setCompletedQuiz(completedQuiz + 1)
